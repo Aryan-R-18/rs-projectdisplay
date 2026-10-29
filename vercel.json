@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/quadruped", "destination": "/quadruped.html" },
+    { "source": "/rouv", "destination": "/rouv.html" },
+    { "source": "/photogrammetry", "destination": "/photogrammetry.html" },
+    { "source": "/amr", "destination": "/amr.html" }
+  ]
+}
