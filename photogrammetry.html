@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Project Showcase · Robotics Society, VSSUT</title>
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== EDIT CONTENT IN THE HTML BELOW (look for "EDIT:" comments) ===== */
+:root{
+  --bg:#0A0A0C; --surface:#121218; --line:#1F1F2A;
+  --red:#E63946; --blue:#3B82F6;
+  --text:#F2F2F5; --muted:#A0A0B0;
+  --head:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+  color-scheme:dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.7 var(--body);overflow-x:hidden;-webkit-text-size-adjust:100%}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+.wrap{width:100%;max-width:960px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+h1,h2,h3{font-family:var(--head);margin:0;line-height:1.15}
+h2{font-size:1.7rem;letter-spacing:-.01em}
+h2::after{content:"";display:block;width:48px;height:3px;margin-top:12px;border-radius:2px;background:linear-gradient(90deg,var(--red),var(--blue))}
+.sec-head{margin-bottom:28px}
+.sec-head p{margin:12px 0 0;color:var(--muted);font-size:.95rem}
+p{margin:0 0 1.1em;color:var(--muted);max-width:65ch}
+
+/* top bar */
+.top{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);background:rgba(10,10,12,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:56px}
+.logo{height:34px;width:auto;min-width:34px;border-radius:6px;object-fit:contain;background:var(--surface);border:1px solid var(--line);font-size:10px;color:var(--muted)}
+.vr{width:1px;height:22px;background:var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(10,10,12,.8);z-index:21}
+
+/* hero */
+.hero{padding:calc(56px + 72px) 0 40px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -30% auto;height:420px;background:radial-gradient(closest-side,rgba(230,57,70,.28),transparent 70%),radial-gradient(closest-side at 80% 40%,rgba(59,130,246,.22),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative}
+.hero h1{font-size:clamp(2.6rem,12vw,5.5rem);font-weight:700;letter-spacing:-.03em}
+.hero h1 span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--red)}
+.tag-line{margin:20px 0 22px;font-size:1.1rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0;list-style:none}
+.chips li{font-size:.85rem;padding:6px 14px;border:1px solid var(--blue);color:var(--blue);border-radius:999px}
+
+/* video */
+.video{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:border-color .2s,box-shadow .2s}
+.video:hover,.video:focus-within{border-color:var(--red);box-shadow:0 0 32px rgba(230,57,70,.25)}
+.video iframe,.video video{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);font-size:.95rem;text-align:center;padding:16px}
+.play{width:64px;height:64px;border-radius:50%;background:var(--red);display:grid;place-items:center}
+.play svg{width:26px;height:26px;fill:#fff;margin-left:3px}
+
+/* about */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 12px}
+.stat b{display:block;font:700 1.3rem var(--head);color:var(--text)}
+.stat small{color:var(--muted);font-size:.8rem}
+
+/* achievements */
+.cards{display:grid;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;gap:16px;align-items:flex-start;transition:transform .2s,border-color .2s}
+.ico{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(230,57,70,.12);color:var(--red)}
+.ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:1.1rem;margin-bottom:4px}
+.card p{margin:0 0 6px;font-size:.95rem}
+.card small{color:var(--blue);font-weight:500}
+
+/* gallery */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.shot{aspect-ratio:4/3;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(135deg,#1a1a24,#14141c);padding:0;cursor:pointer;display:grid;place-items:center;color:var(--muted);position:relative}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shot svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.6}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:20px}
+.lb.open{display:flex}
+.lb-box{width:100%;max-width:900px;aspect-ratio:4/3;background:linear-gradient(135deg,#1a1a24,#14141c);border-radius:12px;overflow:hidden;display:grid;place-items:center;color:var(--muted)}
+.lb-box img{width:100%;height:100%;object-fit:contain}
+.lb button{position:absolute;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--text);font-size:22px;cursor:pointer}
+.lb .x{top:max(16px,env(safe-area-inset-top));right:16px;border-color:var(--red)}
+.lb .p{left:10px}.lb .n{right:10px}
+
+/* tech */
+.group{margin-bottom:26px}
+.group h3{font-size:1rem;margin-bottom:12px;color:var(--text)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{padding:9px 14px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-size:.92rem;color:var(--text);border-left-width:3px}
+.pill.hw{border-left-color:var(--red)}
+.pill.sw{border-left-color:var(--blue)}
+.specs{width:100%;border-collapse:collapse;margin-top:6px}
+.specs th{display:none}
+.specs tr{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
+.specs td{display:block;font-size:.95rem}
+.specs td:first-child{color:var(--text);font-weight:500}
+.specs td:last-child{color:var(--muted)}
+
+/* documents */
+.docs{display:grid;gap:14px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.doc-top{display:flex;gap:14px;align-items:flex-start}
+.doc .ico{background:rgba(59,130,246,.12);color:var(--blue)}
+.doc h3{font-size:1.1rem;margin-bottom:4px}
+.doc p{margin:0;font-size:.95rem}
+.doc small{display:block;margin-top:6px;color:var(--muted);font-size:.8rem}
+.doc-actions{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:10px;font:500 .95rem var(--body);text-decoration:none;border:1px solid var(--line);color:var(--text);transition:border-color .2s,background .2s}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn.view{background:var(--red);border-color:var(--red);color:#fff}
+.btn.dl{border-color:var(--blue);color:var(--blue)}
+@media (hover:hover){.btn.view:hover{background:#cf2f3b}.btn.dl:hover{background:rgba(59,130,246,.12)}}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 14px}
+.member{text-align:center}
+.avatar{position:relative;width:100%;max-width:150px;aspect-ratio:1;margin:0 auto 12px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--red),var(--blue));display:grid;place-items:center;font:700 1.8rem var(--head);color:#fff;padding:3px}
+.avatar::before{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--surface)}
+.avatar span{position:relative;color:var(--muted)}
+.avatar img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:50%;object-fit:cover}
+.member h3{font-size:1rem}
+.member .role{margin:2px 0 6px;font-size:.85rem;color:var(--muted)}
+.member a{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:.9rem;text-decoration:none}
+.member a svg{width:16px;height:16px;fill:currentColor}
+@media (min-width:700px){.docs{grid-template-columns:repeat(2,1fr)}.team{grid-template-columns:repeat(4,1fr)}}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:32px 0 40px;font-size:.9rem;color:var(--muted)}
+footer .links{display:flex;gap:20px;flex-wrap:wrap;margin:12px 0}
+footer a{display:inline-flex;align-items:center;min-height:44px}
+
+/* the one motion moment: hero title wipes in */
+@media (prefers-reduced-motion:no-preference){
+  .hero h1{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}}
+}
+/* play button overlay */
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(230,57,70,.9);border:none;cursor:pointer;display:grid;place-items:center;transition:transform .15s,background .15s;z-index:2}
+.play-btn:hover{background:var(--red);transform:translate(-50%,-50%) scale(1.08)}
+.play-btn.hidden{display:none}
+@media (hover:hover){.card:hover{transform:translateY(-3px);border-color:var(--blue)}.shot:hover{border-color:var(--red)}}
+@media (min-width:700px){
+  section{padding:80px 0}
+  .cards{grid-template-columns:repeat(3,1fr)}.card{flex-direction:column}
+  .grid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .specs th{display:table-cell;text-align:left;color:var(--muted);font-weight:500;padding:8px 0;border-bottom:1px solid var(--line)}
+  .specs tr{display:table-row}.specs td{display:table-cell;padding:12px 0;border-bottom:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <!-- EDIT: replace with your logo files -->
+    <img class="logo" src="assets/robotics-society-logo.png" alt="Robotics Society logo">
+    <span class="vr"></span>
+    <img class="logo" src="assets/vssut-logo.png" alt="VSSUT logo">
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <!-- EDIT: project name, tagline, tags -->
+      <h1>Project<span>Photogrammetry</span></h1>
+      <p class="tag-line">One line that explains what this robot does and why it matters.</p>
+      <ul class="chips"><li>Robotics</li><li>Autonomous</li><li>2026</li></ul>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section style="padding-top:16px">
+    <div class="wrap">
+      <div class="video" tabindex="0">
+        <video id="projVideo" playsinline src="assets/demo.mp4" style="position:absolute;inset:0;width:100%;height:100%;cursor:pointer;">Your browser does not support the video tag.</video>
+        <button class="play-btn" id="playBtn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" width="32" height="32"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head"><h2>About the project</h2></div>
+      <!-- EDIT: your text -->
+      <p>Describe the problem this project solves. Explain what the robot does, where it could be used, and what makes your approach different from existing solutions.</p>
+      <p>Explain how it works in simple terms: sensing, decision making and movement. Mention the key challenges the team faced and how you solved them.</p>
+      <p>Close with where the project stands today and what you plan to build next.</p>
+      <div class="stats">
+        <div class="stat"><b>6</b><small>Team size</small></div>
+        <div class="stat"><b>4 mo</b><small>Duration</small></div>
+        <div class="stat"><b>Prototype</b><small>Status</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS: delete this whole section if there are none -->
+  <section id="achievements">
+    <div class="wrap">
+      <div class="sec-head"><h2>Achievements &amp; patents</h2></div>
+      <div class="cards">
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0zM17 5h3v2a3 3 0 01-3 3M7 5H4v2a3 3 0 003 3"/></svg></div>
+          <div><h3>Competition name</h3><p>Short description of the award or rank won.</p><small>2026</small></div>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/></svg></div>
+          <div><h3>Recognition</h3><p>Featured at an event, expo or publication.</p><small>2026</small></div>
+        </article>
+        <article class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg></div>
+          <div><h3>Patent filed</h3><p>Title of the invention and filing status.</p><small>Application No. XXXX</small></div>
+        </article>
+      </div>
+      <!-- Empty state alternative: <p>Achievements coming soon.</p> -->
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="sec-head"><h2>Gallery</h2><p>Tap a photo to view it full screen.</p></div>
+      <!-- EDIT: put data-src="assets/photoN.jpg" paths; add or remove buttons freely -->
+      <div class="grid" id="grid">
+        <button class="shot" data-src="assets/photo1.jpg" aria-label="Open photo 1"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
+        <button class="shot" data-src="assets/photo2.jpg" aria-label="Open photo 2"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
+        <button class="shot" data-src="assets/photo3.jpg" aria-label="Open photo 3"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
+        <button class="shot" data-src="assets/photo4.jpg" aria-label="Open photo 4"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
+        <button class="shot" data-src="assets/photo5.jpg" aria-label="Open photo 5"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
+        <button class="shot" data-src="assets/photo6.jpg" aria-label="Open photo 6"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section id="tech">
+    <div class="wrap">
+      <div class="sec-head"><h2>Technical requirements</h2></div>
+      <!-- EDIT: pills. Red = hardware, blue = software -->
+      <div class="group"><h3>Hardware</h3><div class="pills">
+        <span class="pill hw">Arduino / ESP32</span><span class="pill hw">DC motors + driver</span><span class="pill hw">LiDAR / ultrasonic</span><span class="pill hw">LiPo battery</span></div></div>
+      <div class="group"><h3>Software</h3><div class="pills">
+        <span class="pill sw">C++</span><span class="pill sw">Python</span><span class="pill sw">ROS 2</span><span class="pill sw">OpenCV</span></div></div>
+      <div class="group"><h3>Tools &amp; platforms</h3><div class="pills">
+        <span class="pill sw">SolidWorks</span><span class="pill sw">KiCad</span><span class="pill sw">Git</span></div></div>
+      <div class="group"><h3>Specifications</h3>
+        <table class="specs">
+          <tr><th>Component</th><th>Specification</th></tr>
+          <tr><td>Microcontroller</td><td>ESP32, 240 MHz dual core</td></tr>
+          <tr><td>Power</td><td>11.1 V, 2200 mAh LiPo</td></tr>
+          <tr><td>Weight</td><td>2.4 kg</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- DOCUMENTS: put PDFs in assets/ and edit the file names below. Copy a .doc block to add more. -->
+  <section id="documents">
+    <div class="wrap">
+      <div class="sec-head"><h2>Documentation &amp; reports</h2></div>
+      <div class="docs">
+        <article class="doc">
+          <div class="doc-top">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg></div>
+            <div><h3>Project report</h3><p>Full write-up covering design, testing and results.</p><small>PDF · 2.4 MB</small></div>
+          </div>
+          <div class="doc-actions">
+            <a class="btn view" href="assets/project-report.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>View</a>
+            <a class="btn dl" href="assets/project-report.pdf" download><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download</a>
+          </div>
+        </article>
+        <article class="doc">
+          <div class="doc-top">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg></div>
+            <div><h3>Circuit &amp; design documentation</h3><p>Schematics, wiring diagrams and mechanical drawings.</p><small>PDF · 1.1 MB</small></div>
+          </div>
+          <div class="doc-actions">
+            <a class="btn view" href="assets/design-docs.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>View</a>
+            <a class="btn dl" href="assets/design-docs.pdf" download><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM: put photos in assets/team/ and edit names, roles and LinkedIn URLs. Initials show if a photo is missing. -->
+  <section id="team">
+    <div class="wrap">
+      <div class="sec-head"><h2>The team behind the project</h2></div>
+      <div class="team">
+        <div class="member">
+          <div class="avatar"><span>AB</span><img src="assets/team/member1.jpg" alt="Student Name 1" loading="lazy" onerror="this.remove()"></div>
+          <h3>Student Name 1</h3><p class="role">Team lead</p>
+          <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="Student Name 1 on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67s-1.88 1.27-1.88 2.59V21h-4z"/></svg>LinkedIn</a>
+        </div>
+        <div class="member">
+          <div class="avatar"><span>CD</span><img src="assets/team/member2.jpg" alt="Student Name 2" loading="lazy" onerror="this.remove()"></div>
+          <h3>Student Name 2</h3><p class="role">Hardware</p>
+          <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="Student Name 2 on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67s-1.88 1.27-1.88 2.59V21h-4z"/></svg>LinkedIn</a>
+        </div>
+        <div class="member">
+          <div class="avatar"><span>EF</span><img src="assets/team/member3.jpg" alt="Student Name 3" loading="lazy" onerror="this.remove()"></div>
+          <h3>Student Name 3</h3><p class="role">Software</p>
+          <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="Student Name 3 on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67s-1.88 1.27-1.88 2.59V21h-4z"/></svg>LinkedIn</a>
+        </div>
+        <div class="member">
+          <div class="avatar"><span>GH</span><img src="assets/team/member4.jpg" alt="Student Name 4" loading="lazy" onerror="this.remove()"></div>
+          <h3>Student Name 4</h3><p class="role">Design</p>
+          <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="Student Name 4 on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67s-1.88 1.27-1.88 2.59V21h-4z"/></svg>LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--text);font-family:var(--head)">Robotics Society, VSSUT</strong><br>Burla, Odisha
+    <!-- EDIT: real links -->
+    <div class="links"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="mailto:you@example.com">Email</a></div>
+    © 2026 Robotics Society, VSSUT
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" aria-label="Close">✕</button>
+  <button class="p" aria-label="Previous photo">‹</button>
+  <div class="lb-box" id="lbBox"></div>
+  <button class="n" aria-label="Next photo">›</button>
+</div>
+
+<script>
+(function(){
+  // Video play button
+  var vid=document.getElementById('projVideo'),btn=document.getElementById('playBtn');
+  if(vid&&btn){
+    btn.addEventListener('click',function(){vid.play();btn.classList.add('hidden');vid.setAttribute('controls','')});
+    vid.addEventListener('click',function(){if(vid.paused){vid.play();btn.classList.add('hidden')}});
+    vid.addEventListener('play',function(){btn.classList.add('hidden')});
+    vid.addEventListener('pause',function(){btn.classList.remove('hidden')});
+  }
+})();
+(function(){
+  var shots=[].slice.call(document.querySelectorAll('.shot')),lb=document.getElementById('lb'),box=document.getElementById('lbBox'),i=0,sx=0;
+  // load real photos; if a file is missing, keep the placeholder icon
+  shots.forEach(function(b){var im=new Image();im.alt='Project photo';im.loading='lazy';im.onload=function(){b.appendChild(im)};im.src=b.dataset.src});
+  function show(n){
+    i=(n+shots.length)%shots.length;
+    var b=shots[i],img=b.querySelector('img');
+    box.innerHTML='';
+    if(img){var c=new Image();c.src=img.src;c.alt=img.alt;box.appendChild(c)}else{box.textContent='Photo '+(i+1)+' placeholder'}
+  }
+  function open(n){show(n);lb.classList.add('open');lb.querySelector('.x').focus()}
+  function close(){lb.classList.remove('open')}
+  shots.forEach(function(b,n){b.addEventListener('click',function(){open(n)})});
+  lb.querySelector('.x').onclick=close;
+  lb.querySelector('.p').onclick=function(){show(i-1)};
+  lb.querySelector('.n').onclick=function(){show(i+1)};
+  lb.addEventListener('click',function(e){if(e.target===lb)close()});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1)});
+  lb.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  lb.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(i+(d<0?1:-1))});
+})();
+</script>
+</body>
+</html>
+

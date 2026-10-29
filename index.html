@@ -101,6 +101,34 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .specs td:first-child{color:var(--text);font-weight:500}
 .specs td:last-child{color:var(--muted)}
 
+/* documents */
+.docs{display:grid;gap:14px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.doc-top{display:flex;gap:14px;align-items:flex-start}
+.doc .ico{background:rgba(59,130,246,.12);color:var(--blue)}
+.doc h3{font-size:1.1rem;margin-bottom:4px}
+.doc p{margin:0;font-size:.95rem}
+.doc small{display:block;margin-top:6px;color:var(--muted);font-size:.8rem}
+.doc-actions{display:flex;gap:10px;margin-top:16px}
+.btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:10px;font:500 .95rem var(--body);text-decoration:none;border:1px solid var(--line);color:var(--text);transition:border-color .2s,background .2s}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn.view{background:var(--red);border-color:var(--red);color:#fff}
+.btn.dl{border-color:var(--blue);color:var(--blue)}
+@media (hover:hover){.btn.view:hover{background:#cf2f3b}.btn.dl:hover{background:rgba(59,130,246,.12)}}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 14px}
+.member{text-align:center}
+.avatar{position:relative;width:100%;max-width:150px;aspect-ratio:1;margin:0 auto 12px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--red),var(--blue));display:grid;place-items:center;font:700 1.8rem var(--head);color:#fff;padding:3px}
+.avatar::before{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--surface)}
+.avatar span{position:relative;color:var(--muted)}
+.avatar img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:50%;object-fit:cover}
+.member h3{font-size:1rem}
+.member .role{margin:2px 0 6px;font-size:.85rem;color:var(--muted)}
+.member a{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:.9rem;text-decoration:none}
+.member a svg{width:16px;height:16px;fill:currentColor}
+@media (min-width:700px){.docs{grid-template-columns:repeat(2,1fr)}.team{grid-template-columns:repeat(4,1fr)}}
+
 /* footer */
 footer{border-top:1px solid var(--line);padding:32px 0 40px;font-size:.9rem;color:var(--muted)}
 footer .links{display:flex;gap:20px;flex-wrap:wrap;margin:12px 0}
@@ -111,6 +139,10 @@ footer a{display:inline-flex;align-items:center;min-height:44px}
   .hero h1{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
   @keyframes rise{from{opacity:0;transform:translateY(24px)}}
 }
+/* play button overlay */
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:rgba(230,57,70,.9);border:none;cursor:pointer;display:grid;place-items:center;transition:transform .15s,background .15s;z-index:2}
+.play-btn:hover{background:var(--red);transform:translate(-50%,-50%) scale(1.08)}
+.play-btn.hidden{display:none}
 @media (hover:hover){.card:hover{transform:translateY(-3px);border-color:var(--blue)}.shot:hover{border-color:var(--red)}}
 @media (min-width:700px){
   section{padding:80px 0}
@@ -147,14 +179,10 @@ footer a{display:inline-flex;align-items:center;min-height:44px}
   <section style="padding-top:16px">
     <div class="wrap">
       <div class="video" tabindex="0">
-        <!-- EDIT: delete .ph below and use ONE of these:
-          <video controls playsinline poster="assets/poster.jpg" src="assets/demo.mp4"></video>
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Project demo" allowfullscreen loading="lazy"></iframe>
-        -->
-        <div class="ph">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></div>
-          Project working video goes here
-        </div>
+        <video id="projVideo" playsinline src="assets/demo.mp4" style="position:absolute;inset:0;width:100%;height:100%;cursor:pointer;">Your browser does not support the video tag.</video>
+        <button class="play-btn" id="playBtn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" width="32" height="32"><path d="M6 4l14 8-14 8z" fill="#fff"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -203,7 +231,7 @@ footer a{display:inline-flex;align-items:center;min-height:44px}
       <div class="sec-head"><h2>Gallery</h2><p>Tap a photo to view it full screen.</p></div>
       <!-- EDIT: put data-src="assets/photoN.jpg" paths; add or remove buttons freely -->
       <div class="grid" id="grid">
-        <button class="shot" data-src="assets/photo1.jpg" aria-label="Open photo 1"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
+        <button class="shot" data-src="assets\amr\amr1.jpg" aria-label="Open photo 1"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
         <button class="shot" data-src="assets/photo2.jpg" aria-label="Open photo 2"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
         <button class="shot" data-src="assets/photo3.jpg" aria-label="Open photo 3"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
         <button class="shot" data-src="assets/photo4.jpg" aria-label="Open photo 4"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg></button>
@@ -234,6 +262,63 @@ footer a{display:inline-flex;align-items:center;min-height:44px}
       </div>
     </div>
   </section>
+  <!-- DOCUMENTS: put PDFs in assets/ and edit the file names below. Copy a .doc block to add more. -->
+  <section id="documents">
+    <div class="wrap">
+      <div class="sec-head"><h2>Documentation &amp; reports</h2></div>
+      <div class="docs">
+        <article class="doc">
+          <div class="doc-top">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg></div>
+            <div><h3>Project report</h3><p>Full write-up covering design, testing and results.</p><small>PDF · 2.4 MB</small></div>
+          </div>
+          <div class="doc-actions">
+            <a class="btn view" href="assets/project-report.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>View</a>
+            <a class="btn dl" href="assets/project-report.pdf" download><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download</a>
+          </div>
+        </article>
+        <article class="doc">
+          <div class="doc-top">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9zM14 3v6h6M8 13h8M8 17h5"/></svg></div>
+            <div><h3>Circuit &amp; design documentation</h3><p>Schematics, wiring diagrams and mechanical drawings.</p><small>PDF · 1.1 MB</small></div>
+          </div>
+          <div class="doc-actions">
+            <a class="btn view" href="assets/design-docs.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>View</a>
+            <a class="btn dl" href="assets/design-docs.pdf" download><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>Download</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM: put photos in assets/team/ and edit names, roles and LinkedIn URLs. Initials show if a photo is missing. -->
+  <section id="team">
+    <div class="wrap">
+      <div class="sec-head"><h2>The team behind the project</h2></div>
+      <div class="team">
+        <div class="member">
+          <div class="avatar"><span>AB</span><img src="assets/team/member1.jpg" alt="Student Name 1" loading="lazy" onerror="this.remove()"></div>
+          <h3>Student Name 1</h3><p class="role">Team lead</p>
+          <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="Student Name 1 on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67s-1.88 1.27-1.88 2.59V21h-4z"/></svg>LinkedIn</a>
+        </div>
+        <div class="member">
+          <div class="avatar"><span>CD</span><img src="assets/team/member2.jpg" alt="Student Name 2" loading="lazy" onerror="this.remove()"></div>
+          <h3>Student Name 2</h3><p class="role">Hardware</p>
+          <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="Student Name 2 on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67s-1.88 1.27-1.88 2.59V21h-4z"/></svg>LinkedIn</a>
+        </div>
+        <div class="member">
+          <div class="avatar"><span>EF</span><img src="assets/team/member3.jpg" alt="Student Name 3" loading="lazy" onerror="this.remove()"></div>
+          <h3>Student Name 3</h3><p class="role">Software</p>
+          <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="Student Name 3 on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67s-1.88 1.27-1.88 2.59V21h-4z"/></svg>LinkedIn</a>
+        </div>
+        <div class="member">
+          <div class="avatar"><span>GH</span><img src="assets/team/member4.jpg" alt="Student Name 4" loading="lazy" onerror="this.remove()"></div>
+          <h3>Student Name 4</h3><p class="role">Design</p>
+          <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener" aria-label="Student Name 4 on LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4V21H3zM9.75 9.75h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.66 4.8 6.13V21h-4v-4.9c0-1.17-.02-2.67-1.63-2.67s-1.88 1.27-1.88 2.59V21h-4z"/></svg>LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -253,6 +338,16 @@ footer a{display:inline-flex;align-items:center;min-height:44px}
 </div>
 
 <script>
+(function(){
+  // Video play button
+  var vid=document.getElementById('projVideo'),btn=document.getElementById('playBtn');
+  if(vid&&btn){
+    btn.addEventListener('click',function(){vid.play();btn.classList.add('hidden');vid.setAttribute('controls','')});
+    vid.addEventListener('click',function(){if(vid.paused){vid.play();btn.classList.add('hidden')}});
+    vid.addEventListener('play',function(){btn.classList.add('hidden')});
+    vid.addEventListener('pause',function(){btn.classList.remove('hidden')});
+  }
+})();
 (function(){
   var shots=[].slice.call(document.querySelectorAll('.shot')),lb=document.getElementById('lb'),box=document.getElementById('lbBox'),i=0,sx=0;
   // load real photos; if a file is missing, keep the placeholder icon
@@ -277,3 +372,4 @@ footer a{display:inline-flex;align-items:center;min-height:44px}
 </script>
 </body>
 </html>
+
